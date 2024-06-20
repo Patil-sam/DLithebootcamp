@@ -1,0 +1,248 @@
+Task: 4                                                          Date: 23/05/2024
+
+Write a program to implement a snake and ladder game.
+• You can take a player number as input.
+• Generate dice score using random method from Math class.
+• Add dice score to the player.
+• Check for the snake or the ladder if the player goes through.
+• Update the player score after a snake or a ladder if any.
+• Check if the player&#39;s score is 100, then declare the player is the winner and exit.
+• Check if the player’s score is &gt;100, then reduce the dice score.
+• Repeat until any one of the players wins the game. 
+
+
+
+
+CODE :
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+
+public class SnakeAndLadder {
+    
+    private static final Map<Integer, Integer> snakes = new HashMap<>();
+    private static final Map<Integer, Integer> ladders = new HashMap<>();
+    private static final int winning_position = 100;
+
+    static {
+      
+        snakes.put(16, 6);
+        snakes.put(47, 26);
+        snakes.put(49, 11);
+        snakes.put(56, 53);
+        snakes.put(62, 19);
+        snakes.put(64, 60);
+        snakes.put(87, 24);
+        snakes.put(93, 73);
+        snakes.put(95, 75);
+        snakes.put(98, 78);
+
+        ladders.put(1, 38);
+        ladders.put(4, 14);
+        ladders.put(9, 31);
+        ladders.put(21, 42);
+        ladders.put(28, 84);
+        ladders.put(36, 44);
+        ladders.put(51, 67);
+        ladders.put(71, 91);
+        ladders.put(80, 100);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Enter the number of players: ");
+        int numPlayers = scanner.nextInt();
+        int[] positions = new int[numPlayers];
+        boolean winner = false;
+
+        while (!winner) {
+            for (int i = 0; i < numPlayers; i++) {
+                System.out.println("Press Enter for Player " + (i + 1) + " to roll the dice");
+                scanner.nextLine(); 
+
+                int diceRoll = random.nextInt(6) + 1;
+                int newPosition = positions[i] + diceRoll;
+
+                if (newPosition > winning_position) {
+                    newPosition = positions[i]; 
+                } else {
+                    newPosition = checkForSnakesOrLadders(newPosition);
+                }
+
+                positions[i] = newPosition;
+                System.out.println("Player " + (i + 1) + " rolled a " + diceRoll + " and moved to position " + positions[i]);
+
+                if (positions[i] == winning_position) {
+                    System.out.println("Player " + (i + 1) + " wins!");
+                    winner = true;
+                    break;
+                }
+            }
+        }
+        scanner.close();
+    }
+
+    private static int checkForSnakesOrLadders(int position) {
+        if (snakes.containsKey(position)) {
+            System.out.println(" Swallowed by a snake your current position is :" + snakes.get(position));
+            return snakes.get(position);
+        } else if (ladders.containsKey(position)) {
+            System.out.println("Climb the ladder!  Your current position is :" + ladders.get(position));
+            return ladders.get(position);
+        }
+        return position;
+    }
+}
+
+
+
+OUTPUT :
+Enter the number of players: 2
+Press Enter for Player 1 to roll the dice
+Climb the ladder! your current position is :14
+Player 1 rolled a 4 and moved to position 14
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 2 and moved to position 2
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 3 and moved to position 17
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 1 and moved to position 3
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 1 and moved to position 18
+Press Enter for Player 2 to roll the dice
+
+Climb the ladder! your current position is :14
+Player 2 rolled a 1 and moved to position 14
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 1 and moved to position 19
+Press Enter for Player 2 to roll the dice
+
+ Swallowed by a snake your current position is :6
+Player 2 rolled a 2 and moved to position 6
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 6 and moved to position 25
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 4 and moved to position 10
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 1 and moved to position 26
+Press Enter for Player 2 to roll the dice
+
+ Swallowed by a snake your current position is :6
+Player 2 rolled a 6 and moved to position 6
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 4 and moved to position 30
+Press Enter for Player 2 to roll the dice
+
+Climb the ladder! your current position is :31
+Player 2 rolled a 3 and moved to position 31
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 1 and moved to position 31
+Press Enter for Player 2 to roll the dice
+
+Climb the ladder! your current position is :44
+Player 2 rolled a 5 and moved to position 44
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 3 and moved to position 34
+Press Enter for Player 2 to roll the dice
+
+ Swallowed by a snake your current position is :26
+Player 2 rolled a 3 and moved to position 26
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 5 and moved to position 39
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 1 and moved to position 27
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 4 and moved to position 43
+Press Enter for Player 2 to roll the dice
+
+Climb the ladder! your current position is :84
+Player 2 rolled a 1 and moved to position 84
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 5 and moved to position 48
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 1 and moved to position 85
+Press Enter for Player 1 to roll the dice
+
+ Swallowed by a snake your current position is :11
+Player 1 rolled a 1 and moved to position 11
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 5 and moved to position 90
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 6 and moved to position 17
+Press Enter for Player 2 to roll the dice
+
+ Swallowed by a snake your current position is :73
+Player 2 rolled a 3 and moved to position 73
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 5 and moved to position 22
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 1 and moved to position 74
+Press Enter for Player 1 to roll the dice
+
+Climb the ladder! your current position is :84
+Player 1 rolled a 6 and moved to position 84
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 1 and moved to position 75
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 2 and moved to position 86
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 6 and moved to position 81
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 4 and moved to position 90
+Press Enter for Player 2 to roll the dice
+
+ Swallowed by a snake your current position is :24
+Player 2 rolled a 6 and moved to position 24
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 2 and moved to position 92
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 1 and moved to position 25
+Press Enter for Player 1 to roll the dice
+
+ Swallowed by a snake your current position is :75
+Player 1 rolled a 3 and moved to position 75
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 4 and moved to position 29
+Press Enter for Player 1 to roll the dice
+
+Player 1 rolled a 2 and moved to position 77
+Press Enter for Player 2 to roll the dice
+
+Player 2 rolled a 5 and moved to position 34
+Press Enter for Player 1 to roll the dice
+
+Climb the ladder! your current position is :100
+Player 1 rolled a 3 and moved to position 100
+Player 1 wins!
+
+=== Code Execution Successful ===
