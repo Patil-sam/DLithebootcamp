@@ -1,0 +1,120 @@
+Task: 27/05/2025
+
+1.	Given an array with n number of elements. Print all prime numbers from the given array.
+Input: n=5,  a=[10,20,11,20,13]
+Output: 11,13
+import java.util.Scanner;
+public class PrimeNumbersFromArray {
+    public static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the size of array: ");
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        System.out.print("Prime numbers in the array: ");
+        boolean foundPrime = false;
+        for (int i = 0; i < n; i++) {
+            if (isPrime(a[i])) {
+                if (foundPrime) {
+                    System.out.print(", ");
+                }
+                System.out.print(a[i]);
+                foundPrime = true;
+            }
+        }
+    }
+}
+            
+2.	Given an array with n number of elements. Return true if sum of the digits of a prime number is again a prime number from the array. Else return false.
+Input: n=5,  a=[27,11,23,3,29]
+Output:  true.
+•	 11 is prime. The sum of digits 2. 2 is again prime.
+•	Just like, 23, 3 and 29 are primes. The sum of digits of these numbers are 5,3, 11 respectively. They are also prime.
+
+
+3.	If the array contains any three continuous numbers, write a program to return true. Else return false.
+input: n=5,  a=[189,34,35,36,765]
+output: true.
+input: n=6,  a=[189,304,5,6,765,7]
+output: false
+import java.util.Scanner;
+
+public class Array {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); 
+        int a[] = new int[n]; 
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        System.out.println(arrayelements(a));
+    }
+
+    static boolean arrayelements(int a[]) {
+        for (int i = 0; i < a.length - 2; i++) {
+            if (a[i] + 1 == a[i + 1] && a[i + 1] + 1 == a[i + 2]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+ 
+4.	If the array contains any three continuous prime numbers, write a program to return true. Else return false.
+input: n=5,  a=[18,11,13,17,65]
+output: true.
+input: n=6,  a=[3,5,6,765,7]
+output: false
+import java.util.Scanner;
+
+public class ContinuousPrimeNumbers {
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean hasThreeContinuousPrimes(int[] a) {
+        for (int i = 0; i < a.length - 2; i++) {
+            if (isPrime(a[i]) && isPrime(a[i+1]) && isPrime(a[i+2])) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the size of the array: ");
+        int n = scanner.nextInt();
+        int[] a = new int[n];
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        boolean result = hasThreeContinuousPrimes(a);
+        if (result) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
