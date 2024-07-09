@@ -26,10 +26,12 @@ margin: 0 10%;
 <body>
 <tr>
 <td><img src="C:\Users\HPW\Downloads\image1.jpg" alt="Image 1"></td>
-<td rowspan="2"><img src="C:\Users\HPW\Downloads\image2.jpg" alt="Image 2"></td> <td><img src="C:\Users\HPW\Downloads\image3.jpg" alt="Image 3"></td>
+<td rowspan="2"><img src="C:\Users\HPW\Downloads\image2.jpg" alt="Image 2"></td>
+<td><img src="C:\Users\HPW\Downloads\image3.jpg" alt="Image 3"></td>
 </tr>
 <tr>
-<td><img src="C:\Users\HPW\Downloads\image4.jpg" alt="Image 4"></td> <td><img src="C:\Users\HPW\Downloads\image5.jpg" alt="Image 5"></td>
+<td><img src="C:\Users\HPW\Downloads\image4.jpg" alt="Image 4"></td>
+<td><img src="C:\Users\HPW\Downloads\image5.jpg" alt="Image 5"></td>
 </tr>
 </table>
 </body>
